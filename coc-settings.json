@@ -1,0 +1,45 @@
+{
+    "coc.preferences.extensionUpdateCheck": "never",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "jsonc",
+        "html",
+        "json",
+        "markdown"
+    ],
+
+    "snippets.ultisnips.enable": true,
+    "snippets.ultisnips.directories": ["Ultisnips"],
+    "snippets.userSnippetsDirectory": "~/.config/nvim/Ultisnips",
+
+    "suggest.noselect": true,
+    "suggest.enablePreselect": false,
+    "suggest.autoTrigger": "always",
+    "suggest.fixInsertedWord": true,
+    "suggest.localityBonus": true,
+    "suggest.floatEnable": true,
+    "suggest.detailField": "preview",
+    "suggest.minTriggerInputLength": 1,
+    "suggest.triggerCompletionWait": 30,
+    "suggest.defaultSortMethod": "length",
+    "snippets.loadFromExtensions": false,
+
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 160,
+
+    "git.changedDecorator": "*",
+    "git.changedSign.text": "c",
+    "git.addedSign.text": "+",
+    "git.removedSign.text": "-",
+
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            "filetypes": ["go"],
+            "initializationOptions": {
+                "usePlaceholders": true
+            }
+        }
+    }
+}

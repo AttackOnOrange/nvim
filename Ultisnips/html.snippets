@@ -1,0 +1,88 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet html "html模板" b
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<title>${1:`!v expand('%:t:r')`}</title>
+	</head>
+
+	<body>
+		$2
+	</body>
+
+</html>
+endsnippet
+
+snippet <!-- "注释" A
+<!-- $1 -->
+endsnippet
+
+
+snippet refresh	"设置页面刷新时间" b
+<meta http-equiv="refresh" content="30" />
+endsnippet
+
+#############
+# Shortcuts #
+#############
+snippet down "Down (down)"
+&#x2193;
+endsnippet
+
+snippet enter "Enter (enter)"
+&#x2305;
+endsnippet
+
+snippet escape "Escape (escape)"
+&#x238B;
+endsnippet
+
+snippet left "Left (left)"
+&#x2190;
+endsnippet
+
+snippet return "Return (return)"
+&#x21A9;
+endsnippet
+
+snippet right "Right (right)"
+&#x2192;
+endsnippet
+
+snippet shift "Shift (shift)"
+&#x21E7;
+endsnippet
+
+snippet tab "Tab (tab)"
+&#x21E5;
+endsnippet
+
+snippet up "Up (up)"
+&#x2191;
+endsnippet
