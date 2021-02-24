@@ -43,46 +43,18 @@ snippet <!-- "注释" A
 <!-- $1 -->
 endsnippet
 
+snippet a "Link" w
+<a href="${1:http://www.${2:url.com}}"${3: target="_blank"}>${4:Anchor Text}</a>
+endsnippet
+
+snippet br "换行" bA
+<br />
+endsnippet
 
 snippet refresh	"设置页面刷新时间" b
 <meta http-equiv="refresh" content="30" />
 endsnippet
 
-#############
-# Shortcuts #
-#############
-snippet down "Down (down)"
-&#x2193;
-endsnippet
-
-snippet enter "Enter (enter)"
-&#x2305;
-endsnippet
-
-snippet escape "Escape (escape)"
-&#x238B;
-endsnippet
-
-snippet left "Left (left)"
-&#x2190;
-endsnippet
-
-snippet return "Return (return)"
-&#x21A9;
-endsnippet
-
-snippet right "Right (right)"
-&#x2192;
-endsnippet
-
-snippet shift "Shift (shift)"
-&#x21E7;
-endsnippet
-
-snippet tab "Tab (tab)"
-&#x21E5;
-endsnippet
-
-snippet up "Up (up)"
-&#x2191;
+snippet textarea "文本域" bA
+<textarea cols="$1" rows="$2"></textarea>
 endsnippet

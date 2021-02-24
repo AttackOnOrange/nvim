@@ -157,6 +157,7 @@ let g:coc_global_extensions = [
             \ 'coc-html',
             \ 'coc-git',
             \ 'coc-css',
+            \ 'coc-phpls',
             \ 'coc-tsserver',
             \ 'coc-marketplace']
 " }}}
@@ -239,6 +240,7 @@ Plug 'junegunn/fzf.vim'
 " }}}
 " mapping{{{
 nmap <silent> <c-p> :Files<cr>
+nmap <silent> <c-b> :Buffers<cr>
 " }}}
 
 Plug 'voldikss/vim-translator'
@@ -262,6 +264,7 @@ vmap <silent> <Leader>tt <Plug>TranslateWV
 Plug 'tpope/vim-commentary'
 " 注释{{{
 autocmd FileType cpp setlocal commentstring=// %s
+autocmd filetype html setlocal commentstring=/*%s*/
 " 自动在注释后加个空格
 let g:NERDSpaceDelims = 1
 " 允许注释空行
@@ -279,6 +282,22 @@ let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
 let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
 " }}}
 
+Plug 'easymotion/vim-easymotion'
+" {{{
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap f <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+" nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" }}}
 
 " 外观{{{
 Plug 'morhetz/gruvbox'
@@ -311,10 +330,10 @@ Plug 'ap/vim-css-color',{ 'for' : 'css' }
 
 " }}}
 
-Plug 'sheerun/vim-polyglot'
-" 各语言高亮和缩进{{{
-
-" }}}
+"  Plug 'sheerun/vim-polyglot'
+"  " 各语言高亮和缩进{{{
+"  
+"  " }}}
 
 " }}}
 
@@ -570,6 +589,7 @@ noremap n nzz
 noremap N Nzz
 nnoremap j gj
 nnoremap k gk
+inoremap <c-j> <c-[>la
 " }}}
 
 " tab{{{
@@ -614,11 +634,14 @@ function! CodeRun()
         :resize 8
         :term go run %
     endif
+    if &filetype == 'javascript'
+        :!node %
+    endif
 endfunction
 
 autocmd filetype go nmap <buffer> <leader>f :w<cr>:!gofmt -w %<cr><cr>:e!<cr>
 autocmd filetype javascript,css,json,typescript,html,md nmap <buffer> <leader>f :Prettier<cr>
-au filetype html inoremap <cr><cr> <br />
+autocmd filetype html nnoremap > 0f>
 " }}}
 
 " }}}
