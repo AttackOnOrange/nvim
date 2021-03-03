@@ -148,6 +148,9 @@ xmap <c-x>  <Plug>(coc-convert-snippet)
 nnoremap <c-s> :CocCommand snippets.editSnippets<cr>
 " }}}
 
+" go 自动导包
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
 let g:coc_global_extensions = [
             \ 'coc-sh',
             \ 'coc-json',
@@ -155,14 +158,17 @@ let g:coc_global_extensions = [
             \ 'coc-vimlsp',
             \ 'coc-snippets',
             \ 'coc-html',
+            \ 'coc-vetur',
             \ 'coc-git',
             \ 'coc-css',
             \ 'coc-phpls',
             \ 'coc-tsserver',
             \ 'coc-marketplace']
 " }}}
+" npm i eslint eslint-plugin-vue -D
 
-Plug 'alvan/vim-closetag'
+Plug 'alvan/vim-closetag', {'for': ['html', 'vue']}
+
 
 Plug 'vimwiki/vimwiki'
 " {{{
@@ -288,11 +294,11 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap f <Plug>(easymotion-overwin-f)
+" nmap f <Plug>(easymotion-overwin-f)
 " or
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-" nmap s <Plug>(easymotion-overwin-f2)
+nmap f <Plug>(easymotion-overwin-f2)
 
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -320,7 +326,7 @@ let g:lightline = {
         \ }
 " }}}
 
-Plug 'gregsexton/matchtag',{ 'for' : 'html' }
+Plug 'gregsexton/matchtag',{ 'for' : ['html','vue'] }
 " html 标签匹配 {{{
 
 " }}}
@@ -506,7 +512,7 @@ nmap <leader>ut : UndotreeToggle<cr>
 
 " 不用管的插件{{{
 
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags', {'for' : ['go', 'cpp']}
 " {{{
 set tags=./.tags;,.tags "ctags配置
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -540,8 +546,8 @@ Plug 'tpope/vim-surround'
 Plug 'gcmt/wildfire.vim'
 " 智能选择文本对象{{{
 let g:wildfire_objects = {
-    \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
-    \ "html,xml" : ["at", "it"],
+    \ "*" : ["iw","i'", 'i"', "i)", "i]", "i}"],
+    \ "html,xml" : ["iw","i'", 'i"', "i)", "i]", "i}","at", "it"],
 \ }
 " }}}
 " mapping{{{
@@ -558,9 +564,9 @@ call plug#end()
 
 " ---------------------------------------------------- autocmd ---------------------------------------------------
 "  {{{
-autocmd bufwritepost $MYVIMRC source % "修改配置文件保存后自动加载
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exec "normal!g'\"" | endif   "光标复位
-autocmd BufEnter * silent! lcd %:p:h    "打开文件时切换到文件所在的路径
+" autocmd bufwritepost $MYVIMRC source % "修改配置文件保存后自动加载
+" autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exec "normal!g'\"" | endif   "光标复位
+" autocmd BufEnter * silent! lcd %:p:h    "打开文件时切换到文件所在的路径
 
 " 输入法{{{
 let s:fcitx_cmd = executable("fcitx5-remote") ? "fcitx5-remote" : "fcitx-remote"
@@ -593,6 +599,7 @@ inoremap <c-j> <c-[>la
 " }}}
 
 " tab{{{
+nnoremap <c-t> :tabnew<cr>
 nnoremap <c-w> :tabclose<cr>
 nnoremap <c-k> :tabnext<cr>
 nnoremap <c-j> :tabprevious<cr>
@@ -625,7 +632,7 @@ tnoremap <A-l> <C-\><C-N><C-w>l
 autocmd filetype html map <buffer> <F5> :w<cr>:!firefox --new-window %:p &<cr><cr>
 
 nnoremap <F5> :call CodeRun()<cr>
-
+cnoremap su w !sudo tee %
 function! CodeRun()
     exec "w"
     if &filetype == 'go'
@@ -641,7 +648,7 @@ endfunction
 
 autocmd filetype go nmap <buffer> <leader>f :w<cr>:!gofmt -w %<cr><cr>:e!<cr>
 autocmd filetype javascript,css,json,typescript,html,md nmap <buffer> <leader>f :Prettier<cr>
-autocmd filetype html nnoremap > 0f>
+autocmd filetype html,vue nnoremap > 0f>
 " }}}
 
 " }}}

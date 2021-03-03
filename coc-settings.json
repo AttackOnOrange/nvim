@@ -1,6 +1,6 @@
 {
     "coc.preferences.extensionUpdateCheck": "never",
-    "coc.preferences.formatOnSaveFiletypes": ["css", "jsonc", "html", "json", "markdown", "javascript"],
+    "coc.preferences.formatOnSaveFiletypes": ["css", "jsonc", "html", "json", "markdown", "javascript", "vue"],
 
     "snippets.ultisnips.enable": true,
     "snippets.ultisnips.directories": ["Ultisnips"],
